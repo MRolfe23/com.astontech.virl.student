@@ -1,0 +1,56 @@
+<!-- ADD NEW MENTEE MODAL -->
+<clr-modal class="modal" style="height: fit-content;"
+                         [(clrModalOpen)]="visable"
+                         [clrModalClosable]="false"
+                         [clrModalStaticBackdrop]="false">
+  <h3 class="modal-title">Add New Mentee</h3>
+  <div class="modal-body">
+      <!-- verical, horizonal or compact -->
+    <form clrForm
+          clrLayout="horizontal"
+          (ngSubmit)="onSubmit(menteeForm)"
+          #menteeForm='ngForm'
+          id="ngForm">
+        <clr-input-container>
+            <label>Mentee Name</label>
+            <input clrInput type="text"
+                            required
+                            [(ngModel)]="model.name"
+                            name="name"
+                            #spy />
+            <clr-control-helper>This helper text displays while the input is pristine and valid</clr-control-helper>
+            <clr-control-helper>This is an Error message that displays on no focus and input is invalid</clr-control-helper>
+        </clr-input-container>
+        <clr-input-container>
+            <label>Working Site</label>
+            <select clrInput  required
+                                [(ngModel)]="model.site"
+                                name="site">
+                <option value="MN">Minnesota</option>
+                <option value="CA">California</option>
+            </select>
+            <clr-control-helper>Select a fucking option, there is only two!</clr-control-helper>
+            <clr-control-error>If you are seeing this, you are really good at fucking up</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+            <label>Business Unit</label>
+            <select clrInput
+                    required
+                    [(ngModel)]="model.bu"
+                    name="bu">
+                <option value="DEV">Development</option>
+                <option value="Cisco">Cisco Data</option>
+                <option value="PM">Project Management</option>
+            </select>
+            <clr-control-helper>Please enter you job position</clr-control-helper>
+            <clr-control-error>This field is required!</clr-control-error>
+        </clr-input-container>
+        <input clrInput type="hidden" name="id" [(ngModel)]="model.id" />
+        <input clrInput type="hidden" name="input" [(ngModel)]="model.assignedVirlInstance" />
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-outline" (click)="onClose()">Cancel</button>
+    <button class="btn btn-primary" form="ngForm" [disabled]="!menteeForm.form.valid">Save</button>
+</div>
+</clr-modal>

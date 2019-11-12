@@ -1,0 +1,16 @@
+<p>
+  parent works!
+</p>
+
+{{ messageFromChild }}
+
+<br>
+
+<input type='text' [(ngModel)]='message_to_child' />
+
+<hr>
+
+<app-child [parent_message]='message'
+           [parent_message2]='message2'
+           (notify)='onNotify($event)'
+           [teachChild]='message_to_child'></app-child>

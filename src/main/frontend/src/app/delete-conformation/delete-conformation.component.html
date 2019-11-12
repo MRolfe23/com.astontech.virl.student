@@ -1,0 +1,13 @@
+<clr-modal class="modal" [(clrModalOpen)]="visable"
+                         [clrModalClosable]="false"
+                         [clrModalStaticBackdrop]="false"
+                         [clrModalSize]="'md'">
+  <h3 class="modal-title">Are you sure you want to permanently delete this Mentee?</h3>
+  <div class="modal-body">
+      <p>Really, really, REALLYYyY sure???</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="onConfirmDelete(menteeToDelete)">Confirm</button>
+      <button type="button" class="btn btn-outline" (click)="onClose()">Cancel</button>
+  </div>
+</clr-modal>

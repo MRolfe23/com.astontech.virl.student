@@ -1,0 +1,90 @@
+<div class="outer-box">
+    <div>
+        <!-- BUTTON GROUP -->
+        <div class="btn-group btn-primary">
+            <button class="btn">
+                <clr-icon shape="home"></clr-icon>
+                Home
+            </button>
+            <button class="btn" (click)='newModal()'>
+                <clr-icon shape="plus"></clr-icon>
+                new
+            </button>
+            <button class="btn" (click)='errorModal = true'>
+                <clr-icon shape="error"></clr-icon>
+                error
+            </button>
+            <clr-dropdown>
+                <button class="btn btn-outline-primary" clrDropdownTrigger>
+                    <clr-icon shape="ellipsis-horizontal"></clr-icon>
+                </button>
+                <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+                    <label class="dropdown-header" aria-hidden="true">Dropdown header</label>
+                    <div clrDropdownItem>Action 1</div>
+                    <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+                    <div clrDropdownItem>Link 2</div>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+        </div>
+    </div>
+
+  <clr-datagrid>
+    <clr-dg-column [clrDgField]="'id'">ID</clr-dg-column>
+    <clr-dg-column [clrDgField]="'name'">Mentee Name</clr-dg-column>
+    <clr-dg-column [clrDgField]="'site'">Site</clr-dg-column>
+    <clr-dg-column [clrDgField]="'bu'">BU</clr-dg-column>
+    <clr-dg-column [clrDgField]="'assignedVirlInstance'">Assigned VIRL Instance</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+
+    <clr-dg-row *clrDgItems="let mentee of mentees">
+        <clr-dg-cell>{{mentee.id}}</clr-dg-cell>
+        <clr-dg-cell>{{mentee.name}}</clr-dg-cell>
+        <clr-dg-cell>{{mentee.site}}</clr-dg-cell>
+        <clr-dg-cell>{{mentee.bu}}</clr-dg-cell>
+        <clr-dg-cell>{{mentee.assignedVirlInstance}}</clr-dg-cell>
+        <clr-dg-cell>
+            <!-- UD BUTTON GROUP -->
+            <div class="btn-group">
+                <button class="btn btn-primary" (click)="editModal(mentee)">
+                    <clr-icon shape="pencil"></clr-icon>
+                    Edit
+                </button>
+                <button class="btn btn-danger" (click)="deleteConfirm(mentee)">
+                    <clr-icon shape="remove"></clr-icon>
+                    Delete
+                </button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>{{mentees.length}} mentees</clr-dg-footer>
+  </clr-datagrid>
+</div>
+
+<!-- new mentee modal now in mentee-form -->
+<app-mentee-form [visable]="newMenteeModal"
+                 [currentMentee]="newVar"
+                 (submitMentee)="saveMentee($event)"
+                 (modalState)="menteeModalState($event)">
+</app-mentee-form>
+
+<!-- ERROR MODAL -->
+<clr-modal class="modal" [(clrModalOpen)]="errorModal"
+                         [clrModalClosable]="false"
+                         [clrModalStaticBackdrop]="false"
+                         [clrModalSize]="'sm'">
+  <h3 class="modal-title">You just experienced an ERROR!</h3>
+  <div class="modal-body">
+      <p>error, error, ERROR!!!</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="errorModal = false">ok</button>
+  </div>
+</clr-modal>
+
+<!-- DELETE CONFORMATION MODAL -->
+<app-delete-conformation [visable]="conformationModal"
+                         [menteeToDelete]="newVar"
+                         (modalState)="deleteConfirmModalState($event)"
+                         (submitDelete)="removeMentee($event)">
+</app-delete-conformation>

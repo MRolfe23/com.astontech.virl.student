@@ -1,0 +1,12 @@
+<p>
+  child works!
+</p>
+
+ {{parent_message}}
+ <br>
+ {{parent_message2}}
+ <br>
+ {{ teachChild }}
+ <hr>
+ <input type='text' (keyup)='notifyParent()' [(ngModel)]="child_message" />
+ <button (click)='notifyParent()'>Send Message to parent</button>
